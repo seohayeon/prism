@@ -12,12 +12,12 @@ const SideContainer = styled.div`
     flex-direction: column;
 `
 
-function SideScreen(){
+function SideScreen({setWindowOpen}){
     
   return (
     <SideContainer>
         <Clock/>
-        <WidgetContainer/>
+        <WidgetContainer setWindowOpen={setWindowOpen}/>
     </SideContainer>
     )
 };

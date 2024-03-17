@@ -22,7 +22,14 @@ const monthText = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 export default function Clock(){
     const [day,setDate] = useState(new Date())
     const MMSS = dateToMMSS(day)
+    const [s,setS] = useState(new Date().getSeconds())
     
+    useEffect(()=>{
+        const id = setInterval(() => {
+          setDate(new Date());
+        }, 1000);
+        return (() => clearInterval(id))
+    },[])
   return (
     <ClockContainer>
         <ClockTime>{MMSS}</ClockTime>

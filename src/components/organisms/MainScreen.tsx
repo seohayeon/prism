@@ -1,5 +1,12 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import styled from 'styled-components'
+import MessageActivity from '../apps/Message'
+import SettingActivity from '../apps/Setting'
+import NoteActivity from '../apps/Note'
+import GalleryActivity from '../apps/Gallery'
+import MusicActivity from '../apps/Music'
+import CalendarActivity from '../apps/Calendar'
+import {Socket} from '../../util/socket'
 
 const MainScreenContainer = styled.div`
     width:40rem;
@@ -32,16 +39,25 @@ const ImgIcon = styled.img`
     height:100%;
 `
 
-const apps = [{name:'메시지',appId:'message'},{name:'메모장',appId:'note'},{name:'사진',appId:'photos'},{name:'음악',appId:'music'},{name:'설정',appId:'setting'}]
-
+const weeks = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 export default function MainScreen({setWindowOpen}){
+    
+    const socket = new Socket()
+    useEffect(()=>{
+        const data=JSON.parse(localStorage.getItem("initialize"))
+        socket.emit('join',data)
+    },[]) 
+    
+    const date = new Date()
+    const apps = [{name:'메시지',appId:'message',activity:<MessageActivity setWindowOpen={setWindowOpen} socket={socket}/>},{name:'메모장',appId:'note',activity:<NoteActivity setWindowOpen={setWindowOpen}/>},{name:'사진',appId:'photos',activity:<GalleryActivity setWindowOpen={setWindowOpen}/>},{name:'음악',appId:'music',activity:<MusicActivity setWindowOpen={setWindowOpen}/>},{name:'설정',appId:'setting',activity:<SettingActivity setWindowOpen={setWindowOpen}/>}]
+    
     
   return (
     <MainScreenContainer>
         {
             apps.map(e=>
                 <App>
-                    <AppIcon onClick={()=>setWindowOpen(true)}>
+                    <AppIcon onClick={()=>setWindowOpen(e.activity)}>
                         <ImgIcon src={`/app_icon/${e.appId}.png`}/>
                     </AppIcon>
                     <AppName>{e.name}</AppName>

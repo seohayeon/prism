@@ -2,9 +2,10 @@ import React from "react";
 import styled from 'styled-components'
 
 const WindowHeaderContainer = styled.div`
-    width:100%;
     padding:0.5rem;
     overflow:hidden;
+    width:calc(100% - 1rem);
+    
 `
 const CloseBtn = styled.div`
     width:1rem;

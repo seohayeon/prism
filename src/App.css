@@ -56,4 +56,13 @@
 body{
     font-family: 'AppleSDGothicNeo', serif;
     font-weight: 500;
+    -ms-user-select: none; 
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
+}
+input,textarea{
+    font-family: 'AppleSDGothicNeo', serif;
+    font-weight: 500;
 }

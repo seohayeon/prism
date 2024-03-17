@@ -1,5 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
+import {ReactComponent as PlayIcon} from "../../../assets/icons/play.svg";
+import {ReactComponent as PauseIcon} from "../../../assets/icons/pause.svg";
+import {ReactComponent as BackwardIcon} from "../../../assets/icons/prev.svg";
+import {ReactComponent as ForwardIcon} from "../../../assets/icons/skip.svg";
 
 
 const MusicWidgetContainer = styled.div`
@@ -8,7 +12,7 @@ const MusicWidgetContainer = styled.div`
     background:white;
     border-radius:0.5rem;
     
-    background: rgba( 255, 255, 255, 0.25 );
+    background: rgba( 255, 255, 255, 0.5 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
@@ -49,6 +53,10 @@ const ProgressBar=styled.div`
     width:30%;
     background:rgba(0,0,0,0.2);
 `
+const Controller=styled.div`
+    text-align:center;
+    margin-top:0.3rem;
+`
 
 export default function MusicWidget(){
     const data = {
@@ -70,6 +78,11 @@ export default function MusicWidget(){
         <Progress>
             <ProgressBar/>
         </Progress>
+        <Controller>
+            <BackwardIcon width={28} height={28}/>
+            <PlayIcon width={30} height={30} style={{marginLeft:'1.4rem',marginRight:'1.4rem'}}/>
+            <ForwardIcon width={28} height={28}/>
+        </Controller>
     </MusicWidgetContainer>
     )
 };
